@@ -24,8 +24,6 @@ async function carregarAlunos() {
          tbody.innerHTML = '';
 
         if(alunos.length === 0) {
-            tbody.innerHTML = '<try><td colspan="5"
-            style="text-align:center;">Nenhum alunos
-            cadastrado.</td></try>';
+            tbody.innerHTML = '<try><td colspan="5" style="text-align:center;">Nenhum alunos cadastrado.</td></try>';
             return;
         }
