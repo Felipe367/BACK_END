@@ -27,3 +27,28 @@ async function carregarAlunos() {
             tbody.innerHTML = '<try><td colspan="5" style="text-align:center;">Nenhum alunos cadastrado.</td></try>';
             return;
         }
+        alunos.forEach(aluno => {
+            const tr = document.creatElement('tr');
+            tr.innerHTML = `
+                <td>#${aluno.id}</td>
+                <td>${aluno.nome}</td>
+                <td>${aluno.email}</td>
+                <td>${aluno.curso}</td>
+                <td class="action">
+                    <button class="btn-icon btn-edit" onclick=
+                    "iniciarEdicao(${aluno.id},
+                     '${aluno.nome}','${aluno.email}',
+                     '${aluno.curso}')">Editar</button>
+                     <button class="btn-icon btn-delete"
+                     onclick="deletarAluno(${aluno.id})">Excluir</button>
+                </td>
+            `;
+            tbody.appendChild(tr);
+            });
+    } catch (erro) {
+        console.error('Erro ao buscar alunos:', erro);
+        alert('Erro de conexão com o servidor!');
+    }
+}
+//2.CRIAR ou ATUALIZAR (POST / PUT)
+
