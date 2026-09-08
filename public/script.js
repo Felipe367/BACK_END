@@ -59,3 +59,29 @@ form.addEventListener('submit', async (e) => {
         email: inputEmail.value,
         curso: inputCurso.value
     };
+     try {
+        if (editandoId) {
+            // Se tem um Id, estamos editando (PUT)
+            await fetch(`${API_URL}/${editandoId}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(aluno)
+            });
+            editandoId = null; //Reseta o estado
+        } else {
+            // Se não tem Id, estamos criando (POST)
+         await fetch(API_URL, {
+             method: 'POST',
+             headers: { 'Content-Type': 'application/json' },
+             body: JSON.stringify(aluno)
+         });
+        } 
+         
+        resetarFormulario();
+        carregarAlunos(); //Recarregar a lista atualizada
+        // do backend
+     } catch (erro) {
+         console.error('Erro ao salvar:', erro);
+         alert('Erro ao salvar os dados no servidor!');
+     }
+});
