@@ -51,4 +51,11 @@ async function carregarAlunos() {
     }
 }
 //2.CRIAR ou ATUALIZAR (POST / PUT)
+form.addEventListener('submit', async (e) => {
+    e.preventDefault(); // Evita recarregar a página
 
+    const aluno = {
+        nome: inputNome.value,
+        email: inputEmail.value,
+        curso: inputCurso.value
+    };
