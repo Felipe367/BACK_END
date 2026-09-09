@@ -85,3 +85,38 @@ form.addEventListener('submit', async (e) => {
          alert('Erro ao salvar os dados no servidor!');
      }
 });
+
+//Deletar e atualizar lista
+async function deletarAluno(id) {
+    if (!confirm(`Tem certeza que deseja excluir o aluno #${id}?`)) return;
+    
+    try {
+        await fetch(`${API_URL}/${id}`, {
+            method: 'DELETE'
+        });
+        carregarAluno(); //Atualiza a lista após deletar
+    } catch (erro) {
+        console.error('Erro ao deletar:', erro);
+    }
+}
+// Utilitários para a interface
+function iniciarEdicao(id, nome, email, curso) {
+    editandoId = id;
+    inputId.value = id;
+    inputNome.value = nome;
+    inputEmail.value = email;
+    inputCurso.value = curso;
+
+    btnSave.textContent = "Atualizar Aluno";
+    btnCancel.style.display = "block";
+}
+function resetarFormulario() {
+    editandoId = null;
+    form.reset();
+    btnSave.textContent = "Salvar Aluno";
+    btnCancel.style.display = "none";
+}
+btnCancel.addEventListener('click', resetarFormulario);
+
+//Inicia buscando a lista ao carregar a página
+carregarAlunos();
