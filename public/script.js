@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3000/api/alunos';
+const API_URL = '/api/alunos';
 
 const form = document.getElementById('aluno-form');
 const tbody = document.getElementById('alunos-tbody');

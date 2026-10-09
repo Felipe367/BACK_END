@@ -5,6 +5,18 @@
       "nome": "Ana",
       "email": "ana@email.com",
       "curso": "Node"
+    },
+    {
+      "id": 2,
+      "nome": "Pedro",
+      "email": "pedro@email.com",
+      "curso": "ADS"
+    },
+    {
+      "id": 3,
+      "nome": "Felipe Moraes",
+      "email": "lipe@gmail.com",
+      "curso": "Engenharia de software"
     }
   ]
 }
