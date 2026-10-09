@@ -1,0 +1,10 @@
+{
+  "alunos": [
+    {
+      "id": 1,
+      "nome": "Ana",
+      "email": "ana@email.com",
+      "curso": "Node"
+    }
+  ]
+}

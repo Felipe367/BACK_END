@@ -14,20 +14,40 @@ app.use(express.static(path.join(__dirname, 'public')));
 function lerBancoDados() {
   if (!fs.existsSync(DB_FILE)) {
     fs.writeFileSync(DB_FILE, JSON.stringify({ alunos: [] }, null, 2));
+    return { alunos: [] };
   }
 
   const data = fs.readFileSync(DB_FILE, 'utf-8');
-  const db = JSON.parse(data);
 
-  if (!Array.isArray(db.alunos)) {
-    db.alunos = [];
+  if (!data || !data.trim()) {
+    fs.writeFileSync(DB_FILE, JSON.stringify({ alunos: [] }, null, 2));
+    return { alunos: [] };
   }
 
-  return db;
+  try {
+    const db = JSON.parse(data);
+
+    if (!db || typeof db !== 'object') {
+      throw new Error('Banco inválido');
+    }
+
+    if (!Array.isArray(db.alunos)) {
+      db.alunos = [];
+    }
+
+    return db;
+  } catch (error) {
+    fs.writeFileSync(DB_FILE, JSON.stringify({ alunos: [] }, null, 2));
+    return { alunos: [] };
+  }
 }
 
 function salvarBancoDados(db) {
-  fs.writeFileSync(DB_FILE, JSON.stringify(db, null, 2));
+  const dadosValidos = db && typeof db === 'object' ? db : { alunos: [] };
+  if (!Array.isArray(dadosValidos.alunos)) {
+    dadosValidos.alunos = [];
+  }
+  fs.writeFileSync(DB_FILE, JSON.stringify(dadosValidos, null, 2));
 }
 
 app.post('/api/alunos', (req, res) => {
